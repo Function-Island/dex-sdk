@@ -97,12 +97,12 @@ export abstract class Router {
     switch (trade.tradeType) {
       case TradeType.EXACT_INPUT:
         if (pulseIn) {
-          methodName = useFeeOnTransfer ? 'swapExactETHForTokensSupportingFeeOnTransferTokens' : 'swapExactETHForTokens'
+          methodName = useFeeOnTransfer ? 'swapExactPLSForTokensSupportingFeeOnTransferTokens' : 'swapExactPLSForTokens'
           // (uint amountOutMin, address[] calldata path, address to, uint deadline)
           args = [amountOut, path, to, deadline]
           value = amountIn
         } else if (pulseOut) {
-          methodName = useFeeOnTransfer ? 'swapExactTokensForETHSupportingFeeOnTransferTokens' : 'swapExactTokensForETH'
+          methodName = useFeeOnTransfer ? 'swapExactTokensForPLSSupportingFeeOnTransferTokens' : 'swapExactTokensForPLS'
           // (uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline)
           args = [amountIn, amountOut, path, to, deadline]
           value = ZERO_HEX
@@ -118,12 +118,12 @@ export abstract class Router {
       case TradeType.EXACT_OUTPUT:
         invariant(!useFeeOnTransfer, 'EXACT_OUT_FOT')
         if (pulseIn) {
-          methodName = 'swapETHForExactTokens'
+          methodName = 'swapPLSForExactTokens'
           // (uint amountOut, address[] calldata path, address to, uint deadline)
           args = [amountOut, path, to, deadline]
           value = amountIn
         } else if (pulseOut) {
-          methodName = 'swapTokensForExactETH'
+          methodName = 'swapTokensForExactPLS'
           // (uint amountOut, uint amountInMax, address[] calldata path, address to, uint deadline)
           args = [amountOut, amountIn, path, to, deadline]
           value = ZERO_HEX
